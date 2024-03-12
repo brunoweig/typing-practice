@@ -1,0 +1,21 @@
+{
+  "name": "typing-practice",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Typing Practice",
+  "private": true,
+  "scripts": {
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
+    "test:watch": "npm test -- --watchAll",
+    "build": "webpack",
+    "dev": "webpack watch"
+  },
+  "keywords": [],
+  "author": "Bruno Weigmann de Matos <bruno.weig@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
