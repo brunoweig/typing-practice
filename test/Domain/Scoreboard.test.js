@@ -1,4 +1,4 @@
-import { Scoreboard } from "../../src/domain/Scoreboard.js"
+import { Scoreboard } from "../../src/Domain/Scoreboard.js"
 
 describe('Scoreboard', () => {
     /** @type {Scoreboard} */
