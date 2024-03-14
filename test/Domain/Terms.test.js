@@ -1,18 +1,27 @@
 import { Terms } from "../../src/Domain/Terms.js"
+import { Random } from "../../src/ValueObject/Random.js"
+import { jest } from "@jest/globals"
 
 describe('Terms', () => {
-    it('count is 0 when no terms generated', () => {
-        let terms = new Terms()
+    let random = new Random()
 
-        expect(terms.count()).toBe(0)
-    })
+    jest
+        .spyOn(random, 'integer')
+        .mockImplementationOnce(() => 0)
 
-    it('count is 2 when generated twice', () => {
-        let terms = new Terms()
+    it('get new term', () => {
+        let terms = new Terms(['a', 'b'], random)
 
         terms.next()
-        terms.next()
 
-        expect(terms.count()).toBe(2)
+        expect(terms.current()).toBe('a')
     })
 })
+
+
+/**
+ * [ ] Gerar um novo termo
+ * [ ] Retorna histórico de palavras
+ * [ ] Verifica se um termo é igual a palavra atual
+ * [x] Conta quantidade de palavra
+ */

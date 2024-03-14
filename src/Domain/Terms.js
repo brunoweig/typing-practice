@@ -1,17 +1,32 @@
+import { Random } from "../ValueObject/Random"
+
 export class Terms {
-    /**
-     * @type {String[]}
-     */
+    /** @type {Random} */
+    #random = null
+
+    /** @type {String[]} */
     #terms = []
 
+    /** @type {number} */
+    #currentIndex = 0
+
+    /**
+     * @param {String[]} terms 
+     * @param {Random[]} terms 
+     */
+    constructor(terms = [], random = null) {
+        this.#terms = terms
+        this.#random = random || new Random()
+    }
+
     next() {
-        this.#terms.push([])
+        this.#currentIndex = this.#random.integer(0, this.#terms.length-1)
     }
 
     /**
-     * @returns {number}
+     * @returns {String}
      */
-    count() {
-        return this.#terms.length
+    current() {
+        return this.#terms[this.#currentIndex]
     }
 }
