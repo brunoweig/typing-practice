@@ -32,7 +32,7 @@ describe('Countdown', () => {
         expect(expectedCallback).toHaveBeenCalledTimes(1)
     })
 
-    it('tick freezes the elapsed time', () => {
+    it('start after tick restart timer', () => {
         countdown.start({milliseconds: 400})
 
         jest.advanceTimersByTime(150)
@@ -41,6 +41,10 @@ describe('Countdown', () => {
 
         jest.advanceTimersByTime(300)
 
-        expect(countdown.getElapsedTimeInMs()).toBe(150)
+        countdown.start({milliseconds: 400})
+
+        jest.advanceTimersByTime(100)
+
+        expect(countdown.getElapsedTimeInMs()).toBe(100)
     })
 })

@@ -22,6 +22,7 @@ export class Countdown {
      * @param {TimeInterval} interval 
      */
     start(interval) {
+        this.#tickTime = null
         let dateInterval = new DateTimeInterval(interval)
 
         if (dateInterval.getInMilliseconds() <= 0) {
@@ -38,7 +39,7 @@ export class Countdown {
     }
 
     /**
-     * @returns {number|null}
+     * @returns {number}
      */
     getElapsedTimeInMs() {
         if (!this.#startTime) {
