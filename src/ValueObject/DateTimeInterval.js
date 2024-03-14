@@ -1,8 +1,4 @@
-/**
- * @typedef TimeInterval
- * @prop {number} milliseconds
- * @prop {number} seconds
- */
+import '../typedefs'
 
 export class DateTimeInterval {
     /** @type {TimeInterval} #DEFAULT_INTERVAL */
