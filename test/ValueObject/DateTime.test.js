@@ -2,14 +2,16 @@ import { DateTime } from "../../src/ValueObject/DateTime.js"
 import { jest } from '@jest/globals'
 
 describe('DateTime', () => {
+    const DEFAULT_DATE = '2024-02-10T12:00:00.000Z'
+
     jest.useFakeTimers({
-        now: new Date('2024-02-10T12:00:00.000Z')
+        now: new Date(DEFAULT_DATE)
     })
 
     it('get utc date', () => {
         const dateTime = new DateTime()
 
-        expect(dateTime.getUTC()).toBe('2024-02-10T12:00:00.000Z')
+        expect(dateTime.getUTC()).toBe(DEFAULT_DATE)
     })
 
     it.each([
@@ -30,5 +32,23 @@ describe('DateTime', () => {
         const secondTime = new DateTime(new Date(input))
 
         expect(secondTime.diffInSeconds(dateTime)).toBe(expected)
+    })
+
+    /** @type {{interval: TimeInterval, expected: string}[]} */
+    const fromIntervalParams = [
+        {
+            interval: {milliseconds: 200},
+            expected: '2024-02-10T12:00:00.200Z'
+        },
+        {
+            interval: {seconds: 1},
+            expected: '2024-02-10T12:00:01.000Z'
+        },
+    ]
+
+    it.each(fromIntervalParams)('from interval %s equals %s', ({interval, expected}) => {
+        let dateTime = DateTime.fromInterval(interval)
+
+        expect(dateTime.getUTC()).toBe(expected)
     })
 })

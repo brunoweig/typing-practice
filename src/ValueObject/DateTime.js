@@ -1,3 +1,6 @@
+import '../typedefs'
+import { DateTimeInterval } from './DateTimeInterval'
+
 export class DateTime {
     /**
      * @type {Date}
@@ -9,6 +12,19 @@ export class DateTime {
      */
     constructor(date = null) {
         this.#date = date || new Date()
+    }
+
+    /**
+     * @param {TimeInterval} interval
+     * @returns {DateTime}
+     */
+    static fromInterval(interval) {
+        let timeInterval = new DateTimeInterval(interval)
+        let now = new Date()
+
+        return new DateTime(new Date(
+            now.getTime() + timeInterval.getInMilliseconds()
+        ))
     }
 
     /**
