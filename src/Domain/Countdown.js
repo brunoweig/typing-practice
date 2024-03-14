@@ -9,9 +9,6 @@ export class Countdown {
     /** @type {DateTime} */
     #tickTime = null
 
-    /** @type {DateTime} */
-    #finishTime = null
-
     /** @type {Function} */
     #onFinishFn = null
 
@@ -30,7 +27,6 @@ export class Countdown {
         }
 
         this.#startTime = new DateTime()
-        this.#finishTime = DateTime.fromDateTimeInterval(dateInterval)
 
         if (this.#onFinishFn) {
             this.#clearInterval()
