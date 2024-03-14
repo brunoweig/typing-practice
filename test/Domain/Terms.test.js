@@ -16,12 +16,22 @@ describe('Terms', () => {
 
         expect(terms.current()).toBe('a')
     })
+
+    it('wrong term not match', () => {
+        let terms = new Terms(['abacate'], random)
+
+        expect(terms.isMatch('ba')).toBeFalsy()
+    })
+
+    it('correct word is match', () => {
+        let terms = new Terms(['abacate'], random)
+
+        expect(terms.isMatch('abacate')).toBeTruthy()
+    })
+
+    it('partial match if  word is match', () => {
+        let terms = new Terms(['abacate'], random)
+
+        expect(terms.isPartialMatch('aba')).toBeTruthy()
+    })
 })
-
-
-/**
- * [ ] Gerar um novo termo
- * [ ] Retorna histórico de palavras
- * [ ] Verifica se um termo é igual a palavra atual
- * [x] Conta quantidade de palavra
- */

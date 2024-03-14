@@ -29,4 +29,20 @@ export class Terms {
     current() {
         return this.#terms[this.#currentIndex]
     }
+
+    /**
+     * @param {String} value 
+     * @returns {Boolean}
+     */
+    isMatch(value) {
+        return this.current() === value
+    }
+
+    /**
+     * @param {String} value 
+     * @returns {Boolean}
+     */
+    isPartialMatch(value) {
+        return this.current().substring(0, value.length) === value
+    }
 }
