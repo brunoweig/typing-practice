@@ -30,8 +30,11 @@ export class Countdown {
         }
     }
 
-    getCurrentTime() {
-        return null
+    /**
+     * @returns {number|null}
+     */
+    getElapsedTimeInMs() {
+        return this.#finishTime?.diffInMilliseconds(new DateTime()) ?? 0
     }
 
     /**

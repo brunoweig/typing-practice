@@ -5,14 +5,16 @@ describe('Countdown', () => {
     /** @type {Countdown} */
     let countdown = null
 
-    jest.useFakeTimers()
+    const DEFAULT_DATE = '2024-02-10T12:00:00.000Z'
+
+    jest.useFakeTimers({now: new Date(DEFAULT_DATE)})
 
     beforeEach(() => {
         countdown = new Countdown()
     })
 
-    it('no current time until start', () => {
-        expect(countdown.getCurrentTime()).toBeNull()
+    it('elapsed time 0 until start', () => {
+        expect(countdown.getElapsedTimeInMs()).toBe(0)
     })
 
     it('error when starting with past interval time', () => {
@@ -25,20 +27,16 @@ describe('Countdown', () => {
         countdown.onFinish(expectedCallback)
         countdown.start({milliseconds: 400})
 
-        jest.runOnlyPendingTimers()
+        jest.advanceTimersByTime(450)
 
         expect(expectedCallback).toHaveBeenCalledTimes(1)
     })
 
     it('reset timer with multiple starts', () => {
-        const expectedCallback = jest.fn()
-
-        countdown.onFinish(expectedCallback)
-        countdown.start({milliseconds: 400})
         countdown.start({milliseconds: 400})
 
-        expect(jest.getTimerCount()).toBe(1)
+        jest.advanceTimersByTime(150)
 
-        jest.runOnlyPendingTimers()
+        expect(countdown.getElapsedTimeInMs()).toBe(250)
     })
 })
