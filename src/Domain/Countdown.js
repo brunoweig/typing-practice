@@ -4,6 +4,12 @@ import '../typedefs.js'
 
 export class Countdown {
     /** @type {DateTime} */
+    #startTime = null
+
+    /** @type {DateTime} */
+    #tickTime = null
+
+    /** @type {DateTime} */
     #finishTime = null
 
     /** @type {Function} */
@@ -22,6 +28,7 @@ export class Countdown {
             throw new Error('Interval time must be positive')
         }
 
+        this.#startTime = new DateTime()
         this.#finishTime = DateTime.fromDateTimeInterval(dateInterval)
 
         if (this.#onFinishFn) {
@@ -34,7 +41,21 @@ export class Countdown {
      * @returns {number|null}
      */
     getElapsedTimeInMs() {
-        return this.#finishTime?.diffInMilliseconds(new DateTime()) ?? 0
+        if (!this.#startTime) {
+            return 0
+        }
+
+        if (this.#tickTime) {
+            return this.#tickTime.diffInMilliseconds(this.#startTime)
+        }
+
+        return (new DateTime()).diffInMilliseconds(this.#startTime) ?? 0
+    }
+
+    tick() {
+        this.#tickTime = new DateTime()
+
+        this.#clearInterval()
     }
 
     /**
