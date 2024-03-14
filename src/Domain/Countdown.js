@@ -6,6 +6,12 @@ export class Countdown {
     /** @type {DateTime} */
     #finishTime = null
 
+    /** @type {Function} */
+    #onFinishFn = null
+
+    /** @type {number} */
+    intervalId = null
+
     /**
      * @param {TimeInterval} interval 
      */
@@ -18,10 +24,27 @@ export class Countdown {
 
         this.#finishTime = DateTime.fromDateTimeInterval(dateInterval)
 
-        // setTimeout()
+        if (this.#onFinishFn) {
+            this.#clearInterval()
+            this.intervalId = setTimeout(this.#onFinishFn, dateInterval.getInMilliseconds())
+        }
     }
 
     getCurrentTime() {
         return null
+    }
+
+    /**
+     * @param {Function} callback 
+     */
+    onFinish(callback) {
+        this.#onFinishFn = callback
+    }
+
+    #clearInterval() {
+        if (this.intervalId) {
+            clearTimeout(this.intervalId)
+            this.intervalId = null
+        }
     }
 }
