@@ -1,5 +1,6 @@
 import { DateTime } from "../../src/ValueObject/DateTime.js"
 import { jest } from '@jest/globals'
+import { DateTimeInterval } from "../../src/ValueObject/DateTimeInterval.js"
 
 describe('DateTime', () => {
     const DEFAULT_DATE = '2024-02-10T12:00:00.000Z'
@@ -45,6 +46,14 @@ describe('DateTime', () => {
             expected: '2024-02-10T12:00:01.000Z'
         },
     ]
+
+    it.each(fromIntervalParams)('from date time interval %s equals %s', ({interval, expected}) => {
+        let dateTime = DateTime.fromDateTimeInterval(
+            new DateTimeInterval(interval)
+        )
+
+        expect(dateTime.getUTC()).toBe(expected)
+    })
 
     it.each(fromIntervalParams)('from interval %s equals %s', ({interval, expected}) => {
         let dateTime = DateTime.fromInterval(interval)

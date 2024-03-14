@@ -19,11 +19,18 @@ export class DateTime {
      * @returns {DateTime}
      */
     static fromInterval(interval) {
-        let timeInterval = new DateTimeInterval(interval)
+        return this.fromDateTimeInterval(new DateTimeInterval(interval))
+    }
+
+    /**
+     * @param {DateTimeInterval} interval
+     * @returns {DateTime}
+     */
+    static fromDateTimeInterval(interval) {
         let now = new Date()
 
         return new DateTime(new Date(
-            now.getTime() + timeInterval.getInMilliseconds()
+            now.getTime() + interval.getInMilliseconds()
         ))
     }
 
