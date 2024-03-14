@@ -9,6 +9,12 @@ describe('Terms', () => {
         .spyOn(random, 'integer')
         .mockImplementationOnce(() => 0)
 
+    it('instance without random parameter', () => {
+        let terms = new Terms(['a'])
+
+        expect(terms.current()).toBe('a')
+    })
+
     it('get new term', () => {
         let terms = new Terms(['a', 'b'], random)
 
