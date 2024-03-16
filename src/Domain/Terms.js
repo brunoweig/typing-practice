@@ -1,4 +1,4 @@
-import { Random } from "../ValueObject/Random"
+import { Random } from "../ValueObject/Random.js"
 
 export class Terms {
     /** @type {Random} */
@@ -11,8 +11,8 @@ export class Terms {
     #currentIndex = 0
 
     /**
-     * @param {String[]} terms 
-     * @param {Random[]} terms 
+     * @param {String[]} terms
+     * @param {Random[]} terms
      */
     constructor(terms = [], random = null) {
         this.#terms = terms
@@ -31,7 +31,7 @@ export class Terms {
     }
 
     /**
-     * @param {String} value 
+     * @param {String} value
      * @returns {Boolean}
      */
     isMatch(value) {
@@ -39,10 +39,18 @@ export class Terms {
     }
 
     /**
-     * @param {String} value 
+     * @param {String} value
      * @returns {Boolean}
      */
     isPartialMatch(value) {
         return this.current().substring(0, value.length) === value
+    }
+
+    /**
+     * @param {String} value
+     * @returns {Boolean}
+     */
+    isError(value) {
+        return !this.isPartialMatch(value)
     }
 }
