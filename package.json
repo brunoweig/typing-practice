@@ -5,8 +5,9 @@
   "description": "Typing Practice",
   "private": true,
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "test:watch": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll",
+    "test": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:coverage": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "test:watch": "NODE_NO_WARNINGS=1 NODE_OPTIONS=--experimental-vm-modules jest --watchAll",
     "build": "webpack",
     "dev": "webpack watch"
   },
