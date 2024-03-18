@@ -27,7 +27,7 @@ export class Terms {
      * @returns {String}
      */
     current() {
-        return this.#terms[this.#currentIndex]
+        return this.#terms[this.#currentIndex].toLowerCase()
     }
 
     /**
@@ -35,7 +35,7 @@ export class Terms {
      * @returns {Boolean}
      */
     isMatch(value) {
-        return this.current() === value
+        return this.current() === value.toLowerCase()
     }
 
     /**
@@ -43,7 +43,7 @@ export class Terms {
      * @returns {Boolean}
      */
     isPartialMatch(value) {
-        return this.current().substring(0, value.length) === value
+        return this.current().substring(0, value.length) === value.toLowerCase()
     }
 
     /**
